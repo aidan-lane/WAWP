@@ -1,0 +1,4 @@
+.vscode
+localhost/
+node_modules/
+.env
