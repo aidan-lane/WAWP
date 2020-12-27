@@ -22,12 +22,15 @@ app.get('/', (req, res) => {
     res.send('hello!');
 });
 
+let state = 0;
+
 /* Socket IO */
 io.on("connection", (socket) => {
-    socket.emit("state", 0);
+    socket.emit("state", state);
 
-    socket.on("data", (data) => {
-        console.log("worked!");
+    socket.on("startPoll", () => {
+        state++;
+        socket.emit("state", state);
     });
 });
 
