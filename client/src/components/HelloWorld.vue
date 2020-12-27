@@ -1,6 +1,6 @@
 <template>
   <div class="hello">
-    <h1>{{ msg }}</h1>
+    <button v-on:click="test">Test</button>
     <p>
       For a guide and recipes on how to configure / customize this project,<br>
       check out the
@@ -31,10 +31,46 @@
 </template>
 
 <script>
+import axios from "axios";
+const instance = axios.create({
+  baseURL: "http://localhost:3000/",
+  withCredentials: false,
+  headers: {
+    'Access-Control-Allow-Origin' : '*',
+    'Access-Control-Allow-Methods':'GET,PUT,POST,DELETE,PATCH,OPTIONS',
+    }
+});
+
 export default {
   name: 'HelloWorld',
-  props: {
-    msg: String
+  data () {
+    return {
+      items: [],
+      state: 0
+    }
+  },
+  sockets: {
+    state(val) { // Receive current poll state
+      this.state = val;
+      if (this.state === 0) {  // adding items
+      
+      }
+      else if (this.state === 1) { // voting stage
+
+      }
+    }
+  },
+  methods: {
+    getItems() {
+      instance.get("items")
+      .then(res => {
+        this.items = res.data;
+      });
+    },
+    test () {
+      console.log("test");
+      this.$socket.client.emit("new_item", {name: "test"});
+    }
   }
 }
 </script>
