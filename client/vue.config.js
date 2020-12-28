@@ -4,5 +4,12 @@ module.exports = {
         watchOptions: {
             poll: true
         }
+    },
+    configureWebpack: {
+        resolve: {
+            alias: {
+                'vue$': 'vue/dist/vue.esm.js'
+            }
+        }
     }
 }

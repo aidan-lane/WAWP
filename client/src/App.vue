@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import HelloWorld from './components/Poll.vue'
+import Poll from './components/Poll.vue'
 
 export default {
   name: 'App',
@@ -17,7 +17,7 @@ export default {
 
 <style>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: Arial, Avenir, Helvetica, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;

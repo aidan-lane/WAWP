@@ -1,7 +1,17 @@
 <template>
   <div>
+    <div class="title"> 
+      What are we playing?
+    </div>
+    <Timer :startTime=100 />
     <div v-if="state === 0">
-      <button v-on:click="startPoll">Start Poll</button>
+      <b-button 
+        variant="primary"
+        @click="startPoll"
+        size="lg"
+      >
+        Start Poll
+      </b-button>
     </div>
     <div v-if="state === 1">
       Add a suggestion
@@ -17,6 +27,8 @@
 
 <script>
 import axios from "axios";
+import Timer from "./Timer";
+
 const instance = axios.create({
   baseURL: "http://localhost:3000/",
   withCredentials: false,
@@ -28,6 +40,9 @@ const instance = axios.create({
 
 export default {
   name: "Poll",
+  components: {
+    Timer
+  },
   data () {
     return {
       items: [],
@@ -66,17 +81,12 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h3 {
-  margin: 40px 0 0;
+.title {
+  font-size: 56px;
+  font-weight: bold;
+  margin-bottom: 10px;
 }
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
+
 a {
   color: #42b983;
 }

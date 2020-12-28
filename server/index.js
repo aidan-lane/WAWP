@@ -30,7 +30,7 @@ io.on("connection", (socket) => {
 
     socket.on("startPoll", () => {
         state++;
-        socket.emit("state", state);
+        io.emit("state", state); // emit to all sockets
     });
 });
 
