@@ -3,7 +3,11 @@
     <div class="title"> 
       What are we playing?
     </div>
-    <Timer :startTime=100 />
+    <Timer 
+      ref="timer"
+      :startTime=60
+      @timeEnd="timeEnd"
+    />
     <div v-if="state === 0">
       <b-button 
         variant="primary"
@@ -54,7 +58,10 @@ export default {
     state(val) { 
       this.state = val;
 
-      if (this.state === 2) { // voting state
+      if (this.state === 1) {
+        this.$refs.timer.startTimer(60);
+      }
+      else if (this.state === 2) { // voting state
         this.getItems();
       }
       else if (this.state === 3) { // results state
@@ -74,6 +81,9 @@ export default {
     },
     addItem () {
       this.$socket.client.emit("newItem", {name: "test", desc: "description!"});
+    },
+    timeEnd() {
+      console.log("ended!");
     }
   }
 }
@@ -84,7 +94,7 @@ export default {
 .title {
   font-size: 56px;
   font-weight: bold;
-  margin-bottom: 10px;
+  margin-bottom: 0px;
 }
 
 a {
